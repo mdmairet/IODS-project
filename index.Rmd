@@ -1,5 +1,6 @@
 ---
 title: "IODS course project"
+author: "Marc Denojean-Mairet"
 output:
   html_document:
     theme: cosmo

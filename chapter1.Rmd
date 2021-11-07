@@ -1,7 +1,7 @@
-
-# About the project
-
-*Write a short description about the course and add a link to your GitHub repository here. This is an R Markdown (.Rmd) file so you should use R Markdown syntax.*
+---
+title: "My Thoughts!"
+output: html_document
+---
 
 ```{r}
 # This is a so-called "R chunk" where you can write R code.
@@ -9,5 +9,13 @@
 date()
 
 ```
-The text continues here.
 
+I am interested in this course because of my research and I am expecting that this course will be a strong introduction to data science.  The course should give me enough knowledge to be able to use data science process in my research.
+
+I learned about the course via an email sent to me by my department.
+
+
+
+My GitHub repository can be found [**here**.](https://github.com/mdmairet/IODS-project)
+
+Here is my course [*diary*](https://mdmairet.github.io/IODS-project/) web page.
