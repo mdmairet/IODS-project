@@ -42,3 +42,16 @@ learning2014 <- filter(learning2014, Points > 0)
 
 # Dimensions are now 166 observations and 7 variables.
 dim(learning2014)
+
+# Set working directory to: setwd("~/IODS-project/IODS-project/data")
+
+# Writes CSV file to working directory 'data'.
+write.csv(learning2014, file="learning2014.csv", row.names=F)
+
+# Reads csv file and test integrity of structure is correct.
+learningTest <- read.csv(file = "learning2014.csv")
+
+str(learning2014)
+str(learningTest)
+head(learningTest)
+
