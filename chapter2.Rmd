@@ -21,8 +21,22 @@ The summary table gives us more information about the means of the variables.
 ```{r}
 
 pairs(learningAnalysis2014[-1], col = "red")
+
 library(GGally)
 ggpairs(learningAnalysis2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 
 summary(learningAnalysis2014)
+
+
 ```
+
+
+```{r}
+ggpairs(learningAnalysis2014, lower = list(combo = wrap("facethist", bins = 20)))
+
+#my_model <- lm(points ~ attitude + stra + surf, data = learningAnalysis2014)
+
+#summary(my_model)
+
+```
+
