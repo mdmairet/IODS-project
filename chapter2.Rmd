@@ -54,3 +54,10 @@ summary(my_model2)
 
 ```
 Based on the above summary table, we see that by removing deep, the fit was not improved and actually got worse.
+
+```{r}
+my_model2 <- lm(Points ~ attitude + stra, data = learningAnalysis2014)
+
+par(mfrow = c(2,2))
+plot(my_model2, which = c(1,2,5))
+```
