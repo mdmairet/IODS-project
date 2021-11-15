@@ -14,17 +14,18 @@ learningAnalysis2014 <- read.csv(file = 'data/learning2014.csv')
 dim(learningAnalysis2014)
 str(learningAnalysis2014)
 ```
+This is a plot of all the relationship among the variables.
 
 ```{r}
 
-#pairs(learningAnalysis2014[-1], col = learningAnalysis2014$gender)
+pairs(learningAnalysis2014[-1], col = "red")
 
 library(ggplot2)
 library(GGally)
 
-
-
 ggpairs(learningAnalysis2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 
 ggplot(learningAnalysis2014, aes(x = attitude, y = Points, col = gender))+geom_point()+geom_smooth(method = "lm")+ggtitle("Student's attitude versus exam points")
+
+summary(learningAnalysis2014)
 ```
