@@ -11,6 +11,9 @@ dim(lrn14)
 # Shows structure of data frame.
 str(lrn14)
 
+# Create attitude scale to Likert scale(1 to 5)
+lrn14$attitude <- lrn14$Attitude / 10
+
 # dplyr library
 library(dplyr)
 
@@ -32,7 +35,7 @@ strategic_columns <- select(lrn14, one_of(strategic_questions))
 lrn14$stra <- rowMeans(strategic_columns)
 
 # Select columns to keep.
-keep_columns <- c("gender","Age","Attitude", "deep", "stra", "surf", "Points")
+keep_columns <- c("gender","Age","attitude", "deep", "stra", "surf", "Points")
 
 # Creates new data set with keep_columns.
 learning2014 <- select(lrn14, one_of(keep_columns))
