@@ -237,6 +237,32 @@ summary(my_model)</code></pre>
 ## Residual standard error: 5.289 on 162 degrees of freedom
 ## Multiple R-squared:  0.2097, Adjusted R-squared:  0.195 
 ## F-statistic: 14.33 on 3 and 162 DF,  p-value: 2.521e-08</code></pre>
+<p>From the above summary table, we see that median for the residual is 0.5474. This would suggest that it will be difficult to predict points based on attitude, stra, and deep. However, it is very difficult to predict human behaviors and 0.5 residual could be acceptable in this case.</p>
+<p>From the coefficients table, we see that the p-value for deep is high which would mean that deep does not affect much points. stra and attitude are better to predict points.</p>
+<p>Below is a new regression where I have removed deep.</p>
+<pre class="r"><code>my_model2 &lt;- lm(Points ~ attitude + stra, data = learningAnalysis2014)
+
+summary(my_model2)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Points ~ attitude + stra, data = learningAnalysis2014)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -17.6436  -3.3113   0.5575   3.7928  10.9295 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   8.9729     2.3959   3.745  0.00025 ***
+## attitude      3.4658     0.5652   6.132 6.31e-09 ***
+## stra          0.9137     0.5345   1.709  0.08927 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.289 on 163 degrees of freedom
+## Multiple R-squared:  0.2048, Adjusted R-squared:  0.1951 
+## F-statistic: 20.99 on 2 and 163 DF,  p-value: 7.734e-09</code></pre>
+<p>Based on the above summary table, we see that by removing deep, the fit was not improved and actually got worse.</p>
 
 
 
