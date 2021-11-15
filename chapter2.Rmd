@@ -1,13 +1,30 @@
-# Insert chapter 2 title here
+---
+title: "Regression and model validation"
+author: "Marc Denojean-Mairet"
+output: html_document
+---
 
-*Describe the work you have done this week and summarize your learning.*
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods.
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using.
 
+For this analysis, a data frame named **learningAnalysis2014** is created.  The CSV file named "learning2014.csv" is read.  The data frame consist of 7 variables (gender ,Age ,attitude, deep,  stra, surf, Points) and 166 observations.  The data are from a survey of statistics students.  The data include the global attitude of the students toward statistics and their exam points.  deep", "stra" and "surf" are combined variables by taking the mean.  "attitude" was scaled based on Likert scale (1-5) by dividing the "Attitude" column by 10.
+
+More information about the data can be found **here** (https://www.mv.helsinki.fi/home/kvehkala/JYTmooc/JYTOPKYS3-meta.txt)
 ```{r}
-date()
+learningAnalysis2014 <- read.csv(file = 'data/learning2014.csv')
+dim(learningAnalysis2014)
+str(learningAnalysis2014)
 ```
 
-Here we go again...
+```{r}
+
+#pairs(learningAnalysis2014[-1], col = learningAnalysis2014$gender)
+
+library(ggplot2)
+library(GGally)
+
+
+
+ggpairs(learningAnalysis2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+
+ggplot(learningAnalysis2014, aes(x = attitude, y = Points, col = gender))+geom_point()+geom_smooth(method = "lm")+ggtitle("Student's attitude versus exam points")
+```
