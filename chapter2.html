@@ -263,7 +263,7 @@ summary(my_model2)</code></pre>
 ## Multiple R-squared:  0.2048, Adjusted R-squared:  0.1951 
 ## F-statistic: 20.99 on 2 and 163 DF,  p-value: 7.734e-09</code></pre>
 <p>Based on the above summary table, we see that by removing deep, the fit was not improved and actually got worse.</p>
-<p>Below are diagnostic plots function: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage. The QQ-plot shows a reasonable fit which shows good ‘normality’. The Residuals vs Fitted values plot shows that it is reasonable since it shows randomness.</p>
+<p>Below are diagnostic plots function: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage. The QQ-plot shows a reasonable fit which shows good ‘normality’. The Residuals vs Fitted values plot shows that it is reasonable since it shows randomness. The Residuals vs Leverage plot shows regular error which would imply regular leverage.</p>
 <pre class="r"><code>my_model2 &lt;- lm(Points ~ attitude + stra, data = learningAnalysis2014)
 
 par(mfrow = c(2,2))

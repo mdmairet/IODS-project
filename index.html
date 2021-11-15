@@ -181,7 +181,7 @@ pre code {
 <pre class="r"><code># This is a so-called &quot;R chunk&quot; where you can write R code.
 
 date()</code></pre>
-<pre><code>## [1] &quot;Sun Nov 14 23:06:15 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Sun Nov 14 23:14:26 2021&quot;</code></pre>
 <p>I am interested in this course because of my research and I am expecting that this course will be a strong introduction to data science. The course should give me enough knowledge to be able to use data science process in my research.</p>
 <p>I learned about the course via an email sent to me by my department.</p>
 <p>My GitHub repository can be found <a href="https://github.com/mdmairet/IODS-project"><strong>here</strong>.</a></p>
@@ -280,7 +280,7 @@ summary(my_model2)</code></pre>
 ## Multiple R-squared:  0.2048, Adjusted R-squared:  0.1951 
 ## F-statistic: 20.99 on 2 and 163 DF,  p-value: 7.734e-09</code></pre>
 <p>Based on the above summary table, we see that by removing deep, the fit was not improved and actually got worse.</p>
-<p>Below are diagnostic plots function: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage. The QQ-plot shows a reasonable fit which shows good ‘normality’. The Residuals vs Fitted values plot shows that it is reasonable since it shows randomness.</p>
+<p>Below are diagnostic plots function: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage. The QQ-plot shows a reasonable fit which shows good ‘normality’. The Residuals vs Fitted values plot shows that it is reasonable since it shows randomness. The Residuals vs Leverage plot shows regular error which would imply regular leverage.</p>
 <pre class="r"><code>my_model2 &lt;- lm(Points ~ attitude + stra, data = learningAnalysis2014)
 
 par(mfrow = c(2,2))
