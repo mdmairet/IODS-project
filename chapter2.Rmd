@@ -22,7 +22,9 @@ The summary table gives us more information about the means of the variables.
 
 pairs(learningAnalysis2014[-1], col = "red")
 
+library(ggplot2)
 library(GGally)
+
 ggpairs(learningAnalysis2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 
 summary(learningAnalysis2014)
@@ -30,13 +32,13 @@ summary(learningAnalysis2014)
 
 ```
 
-
+I am using the following 3 variables to explain Points: 'attitude', 'stra', and 'deep'.
 ```{r}
 ggpairs(learningAnalysis2014, lower = list(combo = wrap("facethist", bins = 20)))
 
-#my_model <- lm(points ~ attitude + stra + surf, data = learningAnalysis2014)
+my_model <- lm(Points ~ attitude + stra + deep, data = learningAnalysis2014)
 
-#summary(my_model)
+summary(my_model)
 
 ```
 
