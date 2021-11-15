@@ -55,6 +55,8 @@ summary(my_model2)
 ```
 Based on the above summary table, we see that by removing deep, the fit was not improved and actually got worse.
 
+Below are diagnostic plots function: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage.  The QQ-plot shows a reasonable fit which shows good 'normality'.  The Residuals vs Fitted values plot shows that it is reasonable since it shows randomness. 
+
 ```{r}
 my_model2 <- lm(Points ~ attitude + stra, data = learningAnalysis2014)
 
