@@ -14,18 +14,15 @@ learningAnalysis2014 <- read.csv(file = 'data/learning2014.csv')
 dim(learningAnalysis2014)
 str(learningAnalysis2014)
 ```
-This is a plot of all the relationship among the variables.
+These are plots of all the relationship among the variables.  From the visualization, we see some positive and negative correlations.  An interesting correlation is attitude and points.  As expected, we see a negative correlation with surf and deep.  The most negative correlation is with deep and points.  We also see that there are more female than male students.  However, from the plots, there is no good fit between gender and points and there is no strong correlations.
+
+The summary table gives us more information about the means of the variables.  
 
 ```{r}
 
 pairs(learningAnalysis2014[-1], col = "red")
-
-library(ggplot2)
 library(GGally)
-
 ggpairs(learningAnalysis2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
-
-ggplot(learningAnalysis2014, aes(x = attitude, y = Points, col = gender))+geom_point()+geom_smooth(method = "lm")+ggtitle("Student's attitude versus exam points")
 
 summary(learningAnalysis2014)
 ```
