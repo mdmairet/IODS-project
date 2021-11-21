@@ -61,11 +61,14 @@ pormath <- por_id %>%
   inner_join(pormath_free,by=c("id.p"="id"),suffix=c("",".p")) %>%
   inner_join(pormath_free,by=c("id.m"="id"),suffix=c("",".m")) %>%
 
+  # Calculate other required variables  
+  ungroup %>% mutate(
+    alc_use = (Dalc + Walc) / 2,
+    high_use = alc_use > 2,
+    cid=3000+row_number()
+  )
+  
 # Below code is from DataCamp.
-
-
-# print out the column names of pormath
-colnames(pormath)
 
 # create a new data frame with only the joined columns
 alc <- select(pormath, one_of(join_cols))
@@ -93,17 +96,13 @@ for(column_name in notjoined_columns) {
     alc[column_name] <- first_column
   }
 }
+
+
 # define a new column alc_use by combining weekday and weekend alcohol use
 alc <- mutate(alc, alc_use = (Dalc + Walc) / 2)
 
 # define a new logical column 'high_use'
 alc <- mutate(alc, high_use = alc_use > 2)
-
-alc["alc_use"]
-# glimpse at the new combined data
-glimpse(alc)
-colnames(alc)
-dim(alc)
 
 g1 <- ggplot(data = alc, aes(x = alc_use, fill = sex))
 
