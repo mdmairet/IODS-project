@@ -19,7 +19,6 @@ dim(studentAlc)
 
 colnames(studentAlc)
 
-studentAlc[,"X"]
 ```
 
 **Data Set Information:**
