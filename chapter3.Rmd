@@ -51,10 +51,30 @@ Poor family relationship could be a predictor of high alcohol use.  Living apart
 
 Poor health could be an indication of high alcohol consumption.  Alcohol can negatively affect physical and mental health.
 
+### These are plots of all variables
+
 ```{r}
 # access the tidyverse libraries tidyr, dplyr, ggplot2
 library(tidyr); library(dplyr); library(ggplot2)
 # draw a bar plot of each variable
 gather(studentAlc) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
+
 ```
+
+### Box plots of my chosen variables vs high-use of alcohol
+
+```{r}
+# initialize a plot of high_use and G3
+g1 <- ggplot(studentAlc, aes(x = high_use, y = G3, col = sex))
+
+# define the plot as a boxplot and draw it
+g1 + geom_boxplot() + ylab("grade")
+
+# initialise a plot of high_use and absences
+g2 <- ggplot(studentAlc, aes(x = high_use, y = absences, col = sex))
+
+# define the plot as a boxplot and draw it
+g2 + geom_boxplot() + ggtitle("Student absences by alcohol consumption and sex")
+```
+
 
