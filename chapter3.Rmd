@@ -5,7 +5,9 @@ date: "18/11/2021"
 output: html_document
 ---
 
-Read new data frame named pormath.csv to studentAlc and print variable names.
+# Logistic regression
+
+Read new data frame named alc.csv to studentAlc and print variable names.
 
 
 ```{r}
