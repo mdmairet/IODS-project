@@ -120,5 +120,7 @@ g2 + facet_wrap("sex") + geom_bar()
 
 glimpse(alc)
 
+colnames(alc)
+
 # Save new data set to data folder
-write.csv(alc,file="~/IODS-project/IODS-project/data/alc.csv")
+write.csv(alc,file="~/IODS-project/IODS-project/data/alc.csv", row.names=FALSE)

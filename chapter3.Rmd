@@ -13,11 +13,13 @@ Read new data frame named pormath.csv to studentAlc and print variable names.
 
 #studentAlc <- read.table("~/IODS-project/IODS-project/data/pormath.csv", sep = ",", header = TRUE)
 
-studentAlc <- read.table("https://github.com/rsund/IODS-project/raw/master/data/alc.csv", sep = ",", header = TRUE)
+studentAlc <- read.table("~/IODS-project/IODS-project/data/alc.csv", sep = ",", header = TRUE)
 
 dim(studentAlc)
 
 colnames(studentAlc)
+
+studentAlc[,"X"]
 ```
 
 **Data Set Information:**
