@@ -172,20 +172,24 @@ pre code {
 
 
 <p>Read new data frame named pormath.csv to studentAlc and print variable names.</p>
-<pre class="r"><code>studentAlc &lt;- read.table(&quot;~/IODS-project/IODS-project/data/pormath.csv&quot;, sep = &quot;,&quot;, header = TRUE)
+<pre class="r"><code>#studentAlc &lt;- read.table(&quot;~/IODS-project/IODS-project/data/pormath.csv&quot;, sep = &quot;,&quot;, header = TRUE)
 
-colnames(studentAlc)</code></pre>
-<pre><code>##  [1] &quot;X&quot;          &quot;school&quot;     &quot;sex&quot;        &quot;age&quot;        &quot;address&quot;   
-##  [6] &quot;famsize&quot;    &quot;Pstatus&quot;    &quot;Medu&quot;       &quot;Fedu&quot;       &quot;Mjob&quot;      
-## [11] &quot;Fjob&quot;       &quot;reason&quot;     &quot;guardian&quot;   &quot;traveltime&quot; &quot;studytime&quot; 
-## [16] &quot;schoolsup&quot;  &quot;famsup&quot;     &quot;activities&quot; &quot;nursery&quot;    &quot;higher&quot;    
-## [21] &quot;internet&quot;   &quot;romantic&quot;   &quot;famrel&quot;     &quot;freetime&quot;   &quot;goout&quot;     
-## [26] &quot;Dalc&quot;       &quot;Walc&quot;       &quot;health&quot;     &quot;n&quot;          &quot;id.p&quot;      
-## [31] &quot;id.m&quot;       &quot;failures&quot;   &quot;paid&quot;       &quot;absences&quot;   &quot;G1&quot;        
-## [36] &quot;G2&quot;         &quot;G3&quot;         &quot;failures.p&quot; &quot;paid.p&quot;     &quot;absences.p&quot;
-## [41] &quot;G1.p&quot;       &quot;G2.p&quot;       &quot;G3.p&quot;       &quot;failures.m&quot; &quot;paid.m&quot;    
-## [46] &quot;absences.m&quot; &quot;G1.m&quot;       &quot;G2.m&quot;       &quot;G3.m&quot;       &quot;alc_use&quot;   
-## [51] &quot;high_use&quot;   &quot;cid&quot;</code></pre>
+studentAlc &lt;- read.table(&quot;https://github.com/rsund/IODS-project/raw/master/data/alc.csv&quot;, sep = &quot;,&quot;, header = TRUE)
+
+dim(studentAlc)</code></pre>
+<pre><code>## [1] 370  51</code></pre>
+<pre class="r"><code>colnames(studentAlc)</code></pre>
+<pre><code>##  [1] &quot;school&quot;     &quot;sex&quot;        &quot;age&quot;        &quot;address&quot;    &quot;famsize&quot;   
+##  [6] &quot;Pstatus&quot;    &quot;Medu&quot;       &quot;Fedu&quot;       &quot;Mjob&quot;       &quot;Fjob&quot;      
+## [11] &quot;reason&quot;     &quot;guardian&quot;   &quot;traveltime&quot; &quot;studytime&quot;  &quot;schoolsup&quot; 
+## [16] &quot;famsup&quot;     &quot;activities&quot; &quot;nursery&quot;    &quot;higher&quot;     &quot;internet&quot;  
+## [21] &quot;romantic&quot;   &quot;famrel&quot;     &quot;freetime&quot;   &quot;goout&quot;      &quot;Dalc&quot;      
+## [26] &quot;Walc&quot;       &quot;health&quot;     &quot;n&quot;          &quot;id.p&quot;       &quot;id.m&quot;      
+## [31] &quot;failures&quot;   &quot;paid&quot;       &quot;absences&quot;   &quot;G1&quot;         &quot;G2&quot;        
+## [36] &quot;G3&quot;         &quot;failures.p&quot; &quot;paid.p&quot;     &quot;absences.p&quot; &quot;G1.p&quot;      
+## [41] &quot;G2.p&quot;       &quot;G3.p&quot;       &quot;failures.m&quot; &quot;paid.m&quot;     &quot;absences.m&quot;
+## [46] &quot;G1.m&quot;       &quot;G2.m&quot;       &quot;G3.m&quot;       &quot;alc_use&quot;    &quot;high_use&quot;  
+## [51] &quot;cid&quot;</code></pre>
 <p><strong>Data Set Information:</strong></p>
 <p>“This data approach student achievement in secondary education of two Portuguese schools. The data attributes include student grades, demographic, social and school related features) and it was collected by using school reports and questionnaires. Two datasets are provided regarding the performance in two distinct subjects: Mathematics (mat) and Portuguese language (por). In [Cortez and Silva, 2008], the two datasets were modeled under binary/five-level classification and regression tasks. Important note: the target attribute G3 has a strong correlation with attributes G2 and G1. This occurs because G3 is the final year grade (issued at the 3rd period), while G1 and G2 correspond to the 1st and 2nd period grades. It is more difficult to predict G3 without G2 and G1, but such prediction is much more useful (see paper source for more details).”</p>
 <p>The above information is from UCI Machine Learning Repository.</p>
