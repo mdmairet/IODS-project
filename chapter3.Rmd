@@ -29,3 +29,30 @@ The above information is from UCI Machine Learning Repository.
 
 More information about the data sets can be found here:(https://archive.ics.uci.edu/ml/datasets/Student+Performance)
 
+
+I chose the following 4 variables to predict high use of alcohol:  G3, absences, famrel, and health.  I have chosen these variables thinking that they would be easily available to a school without the need to survey students.
+
+**G3**:
+
+My assumption here is that low grade is an indication of high alcohol use since high use of alcohol can affect cognitive functions such as memory.
+
+**absences**:
+
+High number of absences could be an indication of high alcohol use as it would affect one's schedule.  Absenses could be due to being sick after consuming a lot of alcohol.
+
+**Pstatus**:
+
+Poor family relationship could be a predictor of high alcohol use.  Living apart parents could be an extra stressor for a student. 
+
+
+**health**:
+
+Poor health could be an indication of high alcohol consumption.  Alcohol can negatively affect physical and mental health.
+
+```{r}
+# access the tidyverse libraries tidyr, dplyr, ggplot2
+library(tidyr); library(dplyr); library(ggplot2)
+# draw a bar plot of each variable
+gather(studentAlc) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
+```
+
