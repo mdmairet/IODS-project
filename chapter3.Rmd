@@ -122,5 +122,14 @@ summary(m)
 
 # print out the coefficients of the model
 coef(m)
+
+# compute odds ratios (OR)
+OR <- coef(m) %>% exp
+
+# compute confidence intervals (CI)
+CI <- confint(m) %>% exp
+
+# print out the odds ratios with their confidence intervals
+cbind(OR, CI)
 ```
 

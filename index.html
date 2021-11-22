@@ -187,7 +187,7 @@ pre code {
 <pre class="r"><code># This is a so-called &quot;R chunk&quot; where you can write R code.
 
 date()</code></pre>
-<pre><code>## [1] &quot;Sun Nov 21 21:04:07 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Sun Nov 21 21:12:39 2021&quot;</code></pre>
 <p>I am interested in this course because of my research and I am expecting that this course will be a strong introduction to data science. The course should give me enough knowledge to be able to use data science process in my research.</p>
 <p>I learned about the course via an email sent to me by my department.</p>
 <p>My GitHub repository can be found <a href="https://github.com/mdmairet/IODS-project"><strong>here</strong>.</a></p>
@@ -455,6 +455,20 @@ summary(m)</code></pre>
 coef(m)</code></pre>
 <pre><code>## (Intercept)          G3    absences       goout      health 
 ## -3.70363174 -0.03852050  0.07435996  0.72459398  0.15179099</code></pre>
+<pre class="r"><code># compute odds ratios (OR)
+OR &lt;- coef(m) %&gt;% exp
+
+# compute confidence intervals (CI)
+CI &lt;- confint(m) %&gt;% exp</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code># print out the odds ratios with their confidence intervals
+cbind(OR, CI)</code></pre>
+<pre><code>##                    OR       2.5 %    97.5 %
+## (Intercept) 0.0246339 0.004960425 0.1109072
+## G3          0.9622120 0.890726272 1.0397748
+## absences    1.0771945 1.033123265 1.1280521
+## goout       2.0638929 1.642693029 2.6260422
+## health      1.1639169 0.973629481 1.3981834</code></pre>
 </div>
 </div>
 
