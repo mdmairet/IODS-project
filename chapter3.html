@@ -396,6 +396,15 @@ table(high_use = studentAlc$high_use, prediction = studentAlc$prediction) %&gt;%
 ##    FALSE 0.62972973 0.07027027 0.70000000
 ##    TRUE  0.17567568 0.12432432 0.30000000
 ##    Sum   0.80540541 0.19459459 1.00000000</code></pre>
+<pre class="r"><code># define a loss function (average prediction error)
+loss_func &lt;- function(class, prob) {
+  n_wrong &lt;- abs(class - prob) &gt; 0.5
+  mean(n_wrong)
+}
+
+# call loss_func to compute the average number of wrong predictions in the (training) data
+loss_func(class = studentAlc$high_use, prob = studentAlc$probability)</code></pre>
+<pre><code>## [1] 0.2459459</code></pre>
 </div>
 </div>
 

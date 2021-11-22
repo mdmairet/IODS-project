@@ -189,7 +189,7 @@ pre code {
 <pre class="r"><code># This is a so-called &quot;R chunk&quot; where you can write R code.
 
 date()</code></pre>
-<pre><code>## [1] &quot;Sun Nov 21 22:11:25 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Sun Nov 21 22:22:09 2021&quot;</code></pre>
 <p>I am interested in this course because of my research and I am expecting that this course will be a strong introduction to data science. The course should give me enough knowledge to be able to use data science process in my research.</p>
 <p>I learned about the course via an email sent to me by my department.</p>
 <p>My GitHub repository can be found <a href="https://github.com/mdmairet/IODS-project"><strong>here</strong>.</a></p>
@@ -521,6 +521,15 @@ table(high_use = studentAlc$high_use, prediction = studentAlc$prediction) %&gt;%
 ##    FALSE 0.62972973 0.07027027 0.70000000
 ##    TRUE  0.17567568 0.12432432 0.30000000
 ##    Sum   0.80540541 0.19459459 1.00000000</code></pre>
+<pre class="r"><code># define a loss function (average prediction error)
+loss_func &lt;- function(class, prob) {
+  n_wrong &lt;- abs(class - prob) &gt; 0.5
+  mean(n_wrong)
+}
+
+# call loss_func to compute the average number of wrong predictions in the (training) data
+loss_func(class = studentAlc$high_use, prob = studentAlc$probability)</code></pre>
+<pre><code>## [1] 0.2459459</code></pre>
 </div>
 </div>
 
