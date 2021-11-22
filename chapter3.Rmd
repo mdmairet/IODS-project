@@ -180,3 +180,4 @@ loss_func(class = studentAlc$high_use, prob = studentAlc$probability)
 
 ```
 
+The goal of a loss function is to get a small number as possible.  The loss function here is around 0.25.  Therefore, the model does not predict correctly 25% of the time.  The model perform better than the simple guessing strategy.

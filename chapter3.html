@@ -405,6 +405,7 @@ loss_func &lt;- function(class, prob) {
 # call loss_func to compute the average number of wrong predictions in the (training) data
 loss_func(class = studentAlc$high_use, prob = studentAlc$probability)</code></pre>
 <pre><code>## [1] 0.2459459</code></pre>
+<p>The goal of a loss function is to get a small number as possible. The loss function here is around 0.25. Therefore, the model does not predict correctly 25% of the time. The model perform better than the simple guessing strategy.</p>
 </div>
 </div>
 
