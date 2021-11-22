@@ -175,6 +175,8 @@ pre code {
 <li><a href="#logistic-regression">Logistic regression</a>
 <ul>
 <li><a href="#numerical-exploration-of-my-chosen-variables">Numerical exploration of my chosen variables</a></li>
+<li><a href="#interpretation-of-the-above-plots-and-tables">Interpretation of the above plots and tables</a></li>
+<li><a href="#logistic-regression-to-statistically-explore-the-relationship-between-my-chosen-variables">Logistic regression to statistically explore the relationship between my chosen variables</a></li>
 </ul></li>
 </ul>
 </div>
@@ -185,7 +187,7 @@ pre code {
 <pre class="r"><code># This is a so-called &quot;R chunk&quot; where you can write R code.
 
 date()</code></pre>
-<pre><code>## [1] &quot;Sun Nov 21 20:03:19 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Sun Nov 21 21:04:07 2021&quot;</code></pre>
 <p>I am interested in this course because of my research and I am expecting that this course will be a strong introduction to data science. The course should give me enough knowledge to be able to use data science process in my research.</p>
 <p>I learned about the course via an email sent to me by my department.</p>
 <p>My GitHub repository can be found <a href="https://github.com/mdmairet/IODS-project"><strong>here</strong>.</a></p>
@@ -410,6 +412,49 @@ studentAlc %&gt;% group_by(sex, high_use) %&gt;% summarise(count = n(), mean_hea
 ## 2 F     TRUE        41        3.39
 ## 3 M     FALSE      105        3.67
 ## 4 M     TRUE        70        3.93</code></pre>
+</div>
+<div id="interpretation-of-the-above-plots-and-tables" class="section level2">
+<h2>Interpretation of the above plots and tables</h2>
+<p>We see that grades are lower for male when high_use of alcohol is true. Female seems to be less negatively affected. Final grade is not as a strong predictor as I thought. Absences and high_use of alcohol seems to have a good correlation. Female seems to have a little more absences than male when high_use of alcohol is true. going out shows some correlation for male and female for high_use of alcohol. The more a student go out the more he or she consume alcohol. Health does not seem to have a strong correlation with high_use of alcohol. I would have thought that there would have been a stronger correlation. It is possible that the participants did not truthfully answer this question or that participants are not aware of their overall health (mental and physical). This seems to be especially true for male. Female have a broader range of answers with 25% of them describing their health below 2 (Q1 high_use = true).</p>
+</div>
+<div id="logistic-regression-to-statistically-explore-the-relationship-between-my-chosen-variables" class="section level2">
+<h2>Logistic regression to statistically explore the relationship between my chosen variables</h2>
+<p>For this model, high_use is the target variable and final grade, absences, going out, and health are the predictors. I did not include sex because if a school needs to predict high_use of alcohol, sex might add an unnecessary bias. For instance, male students might be watched more carefully than female students because male seems to have higher high_use of alcohol.</p>
+<pre class="r"><code># find the model with glm()
+m &lt;- glm(high_use ~ G3 + absences + goout + health, data = studentAlc, family = &quot;binomial&quot;)
+
+# print out a summary of the model
+summary(m)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = high_use ~ G3 + absences + goout + health, family = &quot;binomial&quot;, 
+##     data = studentAlc)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8342  -0.7505  -0.5508   0.9357   2.3172  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -3.70363    0.79076  -4.684 2.82e-06 ***
+## G3          -0.03852    0.03935  -0.979 0.327587    
+## absences     0.07436    0.02212   3.362 0.000773 ***
+## goout        0.72459    0.11941   6.068 1.29e-09 ***
+## health       0.15179    0.09209   1.648 0.099275 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 452.04  on 369  degrees of freedom
+## Residual deviance: 386.07  on 365  degrees of freedom
+## AIC: 396.07
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code># print out the coefficients of the model
+coef(m)</code></pre>
+<pre><code>## (Intercept)          G3    absences       goout      health 
+## -3.70363174 -0.03852050  0.07435996  0.72459398  0.15179099</code></pre>
 </div>
 </div>
 
