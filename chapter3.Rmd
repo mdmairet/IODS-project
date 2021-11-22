@@ -141,4 +141,32 @@ From the Odd Ratio table, we see that absences, going out, and health have an OR
 
 It seems that most of my chosen variables have some positive association with high_use.  Therefore, they could be used to correctly predict high_use.
 
+## Predictive power of my model
+
+```{r}
+# predict() the probability of high_use
+probabilities <- predict(m, type = "response")
+
+# add the predicted probabilities to 'studentAlc'
+studentAlc <- mutate(studentAlc, probability = probabilities)
+
+# use the probabilities to make a prediction of high_use
+studentAlc <- mutate(studentAlc, prediction = probability > 0.5)
+
+# see the last ten original classes, predicted probabilities, and class predictions
+select(studentAlc, G3, absences, goout, health, high_use, probability, prediction) %>% tail(10)
+
+# tabulate the target variable versus the predictions
+table(high_use = studentAlc$high_use, prediction = studentAlc$prediction)
+
+# initialize a plot of 'high_use' versus 'probability' in 'studentAlc'
+g <- ggplot(studentAlc, aes(x = probability, y = high_use, col = prediction))
+
+# define the geom as points and draw the plot
+g + geom_point()
+
+# tabulate the target variable versus the predictions
+table(high_use = studentAlc$high_use, prediction = studentAlc$prediction) %>% prop.table %>% addmargins
+
+```
 
