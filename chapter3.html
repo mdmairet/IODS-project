@@ -407,6 +407,116 @@ loss_func(class = studentAlc$high_use, prob = studentAlc$probability)</code></pr
 <pre><code>## [1] 0.2459459</code></pre>
 <p>The goal of a loss function is to get a small number as possible. The loss function here is around 0.25. Therefore, the model does not predict correctly 25% of the time. The model perform better than the simple guessing strategy.</p>
 </div>
+<div id="fold-cross-validation" class="section level2">
+<h2>10-fold cross-validation</h2>
+<div id="bonus" class="section level3">
+<h3>Bonus</h3>
+<pre class="r"><code># K-fold cross-validation
+library(boot)
+cv &lt;- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
+
+# average number of wrong predictions in the cross validation
+cv$delta[1]</code></pre>
+<pre><code>## [1] 0.2513514</code></pre>
+<p>The result of the cross-validation (K=10) is similar to the previous result of the loss function. My model seems to produce a similar result as the model found in DataCamp.</p>
+</div>
+<div id="super-bonus" class="section level3">
+<h3>Super Bonus</h3>
+<div id="many-variables" class="section level4">
+<h4>Many variables</h4>
+<pre class="r"><code># New model with many variables
+m &lt;- glm(high_use ~ G3 + absences + goout + health + studytime + failures + freetime + famrel, data = studentAlc, family = &quot;binomial&quot;)
+
+# compute odds ratios (OR)
+OR &lt;- coef(m) %&gt;% exp
+
+# compute confidence intervals (CI)
+CI &lt;- confint(m) %&gt;% exp</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code># print out the odds ratios with their confidence intervals
+cbind(OR, CI)</code></pre>
+<pre><code>##                    OR      2.5 %    97.5 %
+## (Intercept) 0.1112482 0.01462431 0.7969864
+## G3          1.0004152 0.91884143 1.0909553
+## absences    1.0707813 1.02620258 1.1197948
+## goout       2.0410506 1.59736372 2.6461037
+## health      1.1744770 0.97382116 1.4240680
+## studytime   0.6138411 0.43227534 0.8559677
+## failures    1.3512750 0.85082981 2.1704783
+## freetime    1.1869927 0.89658690 1.5765989
+## famrel      0.6655703 0.49995249 0.8817370</code></pre>
+<pre class="r"><code># predict() the probability of high_use
+probabilities &lt;- predict(m, type = &quot;response&quot;)
+
+# add the predicted probabilities to &#39;studentAlc&#39;
+studentAlc &lt;- mutate(studentAlc, probability = probabilities)
+
+# use the probabilities to make a prediction of high_use
+studentAlc &lt;- mutate(studentAlc, prediction = probability &gt; 0.5)
+
+# define a loss function (average prediction error)
+loss_func &lt;- function(class, prob) {
+  n_wrong &lt;- abs(class - prob) &gt; 0.5
+  mean(n_wrong)
+}
+
+# call loss_func to compute the average number of wrong predictions in the (training) data
+loss_func(class = studentAlc$high_use, prob = studentAlc$probability)</code></pre>
+<pre><code>## [1] 0.2324324</code></pre>
+<pre class="r"><code># K-fold cross-validation
+library(boot)
+cv &lt;- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
+
+# average number of wrong predictions in the cross validation
+cv$delta[1]</code></pre>
+<pre><code>## [1] 0.2594595</code></pre>
+</div>
+<div id="new-model-with-2-variable-only" class="section level4">
+<h4>New model with 2 variable only</h4>
+<pre class="r"><code># New model with 2 variables
+m &lt;- glm(high_use ~ absences + goout, data = studentAlc, family = &quot;binomial&quot;)
+
+# compute odds ratios (OR)
+OR &lt;- coef(m) %&gt;% exp
+
+# compute confidence intervals (CI)
+CI &lt;- confint(m) %&gt;% exp</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code># print out the odds ratios with their confidence intervals
+cbind(OR, CI)</code></pre>
+<pre><code>##                     OR      2.5 %     97.5 %
+## (Intercept) 0.02644199 0.01082308 0.06045431
+## absences    1.07930582 1.03477610 1.13034717
+## goout       2.08298255 1.66258410 2.64170298</code></pre>
+<pre class="r"><code># predict() the probability of high_use
+probabilities &lt;- predict(m, type = &quot;response&quot;)
+
+# add the predicted probabilities to &#39;studentAlc&#39;
+studentAlc &lt;- mutate(studentAlc, probability = probabilities)
+
+# use the probabilities to make a prediction of high_use
+studentAlc &lt;- mutate(studentAlc, prediction = probability &gt; 0.5)
+
+# define a loss function (average prediction error)
+loss_func &lt;- function(class, prob) {
+  n_wrong &lt;- abs(class - prob) &gt; 0.5
+  mean(n_wrong)
+}
+
+# call loss_func to compute the average number of wrong predictions in the (training) data
+loss_func(class = studentAlc$high_use, prob = studentAlc$probability)</code></pre>
+<pre><code>## [1] 0.2378378</code></pre>
+<pre class="r"><code># K-fold cross-validation
+library(boot)
+cv &lt;- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
+
+# average number of wrong predictions in the cross validation
+cv$delta[1]</code></pre>
+<pre><code>## [1] 0.2405405</code></pre>
+<p>It seems that the result is not greatly improved when going from many variables to only 2 variables.</p>
+</div>
+</div>
+</div>
 </div>
 
 

@@ -181,3 +181,102 @@ loss_func(class = studentAlc$high_use, prob = studentAlc$probability)
 ```
 
 The goal of a loss function is to get a small number as possible.  The loss function here is around 0.25.  Therefore, the model does not predict correctly 25% of the time.  The model perform better than the simple guessing strategy.
+
+## 10-fold cross-validation
+
+### Bonus
+```{r}
+# K-fold cross-validation
+library(boot)
+cv <- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
+
+# average number of wrong predictions in the cross validation
+cv$delta[1]
+```
+
+The result of the cross-validation (K=10) is similar to the previous result of the loss function.  My model seems to produce a similar result as the model found in DataCamp.
+
+### Super Bonus
+
+#### Many variables
+```{r}
+# New model with many variables
+m <- glm(high_use ~ G3 + absences + goout + health + studytime + failures + freetime + famrel, data = studentAlc, family = "binomial")
+
+# compute odds ratios (OR)
+OR <- coef(m) %>% exp
+
+# compute confidence intervals (CI)
+CI <- confint(m) %>% exp
+
+# print out the odds ratios with their confidence intervals
+cbind(OR, CI)
+
+# predict() the probability of high_use
+probabilities <- predict(m, type = "response")
+
+# add the predicted probabilities to 'studentAlc'
+studentAlc <- mutate(studentAlc, probability = probabilities)
+
+# use the probabilities to make a prediction of high_use
+studentAlc <- mutate(studentAlc, prediction = probability > 0.5)
+
+# define a loss function (average prediction error)
+loss_func <- function(class, prob) {
+  n_wrong <- abs(class - prob) > 0.5
+  mean(n_wrong)
+}
+
+# call loss_func to compute the average number of wrong predictions in the (training) data
+loss_func(class = studentAlc$high_use, prob = studentAlc$probability)
+
+# K-fold cross-validation
+library(boot)
+cv <- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
+
+# average number of wrong predictions in the cross validation
+cv$delta[1]
+```
+
+#### New model with 2 variable only
+
+```{r}
+# New model with 2 variables
+m <- glm(high_use ~ absences + goout, data = studentAlc, family = "binomial")
+
+# compute odds ratios (OR)
+OR <- coef(m) %>% exp
+
+# compute confidence intervals (CI)
+CI <- confint(m) %>% exp
+
+# print out the odds ratios with their confidence intervals
+cbind(OR, CI)
+
+# predict() the probability of high_use
+probabilities <- predict(m, type = "response")
+
+# add the predicted probabilities to 'studentAlc'
+studentAlc <- mutate(studentAlc, probability = probabilities)
+
+# use the probabilities to make a prediction of high_use
+studentAlc <- mutate(studentAlc, prediction = probability > 0.5)
+
+# define a loss function (average prediction error)
+loss_func <- function(class, prob) {
+  n_wrong <- abs(class - prob) > 0.5
+  mean(n_wrong)
+}
+
+# call loss_func to compute the average number of wrong predictions in the (training) data
+loss_func(class = studentAlc$high_use, prob = studentAlc$probability)
+
+# K-fold cross-validation
+library(boot)
+cv <- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
+
+# average number of wrong predictions in the cross validation
+cv$delta[1]
+```
+
+It seems that the result is not greatly improved when going from many variables to only 2 variables.
