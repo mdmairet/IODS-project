@@ -177,6 +177,7 @@ pre code {
 <li><a href="#numerical-exploration-of-my-chosen-variables">Numerical exploration of my chosen variables</a></li>
 <li><a href="#interpretation-of-the-above-plots-and-tables">Interpretation of the above plots and tables</a></li>
 <li><a href="#logistic-regression-to-statistically-explore-the-relationship-between-my-chosen-variables">Logistic regression to statistically explore the relationship between my chosen variables</a></li>
+<li><a href="#interpretation-of-the-above-model">Interpretation of the above model</a></li>
 </ul></li>
 </ul>
 </div>
@@ -187,7 +188,7 @@ pre code {
 <pre class="r"><code># This is a so-called &quot;R chunk&quot; where you can write R code.
 
 date()</code></pre>
-<pre><code>## [1] &quot;Sun Nov 21 21:12:39 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Sun Nov 21 21:46:59 2021&quot;</code></pre>
 <p>I am interested in this course because of my research and I am expecting that this course will be a strong introduction to data science. The course should give me enough knowledge to be able to use data science process in my research.</p>
 <p>I learned about the course via an email sent to me by my department.</p>
 <p>My GitHub repository can be found <a href="https://github.com/mdmairet/IODS-project"><strong>here</strong>.</a></p>
@@ -469,6 +470,11 @@ cbind(OR, CI)</code></pre>
 ## absences    1.0771945 1.033123265 1.1280521
 ## goout       2.0638929 1.642693029 2.6260422
 ## health      1.1639169 0.973629481 1.3981834</code></pre>
+</div>
+<div id="interpretation-of-the-above-model" class="section level2">
+<h2>Interpretation of the above model</h2>
+<p>From the model P-values, we see that absences and going out are likely relevant variables to explain high_use of alcohol. However, final grade and health show that the data are providing little evidence that these variables are needed to explain high_use.</p>
+<p>From the Odd Ratio table, we see that absences and going out have an OR greater than 1. This would imply that these variables are positively associated with high_use of alcohol. Going out has a Odd Ratio of 2 showing a very strong positive association with high_use of alcohol.</p>
 </div>
 </div>
 
