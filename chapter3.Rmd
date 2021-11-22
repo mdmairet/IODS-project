@@ -32,7 +32,7 @@ The above information is from UCI Machine Learning Repository.
 More information about the data sets can be found here:(https://archive.ics.uci.edu/ml/datasets/Student+Performance)
 
 
-I chose the following 4 variables to predict high use of alcohol:  G3, absences, famrel, and health.  I have chosen these variables thinking that they would be easily available to a school without the need to survey students.
+I chose the following 4 variables to predict high use of alcohol:  G3, absences, Pstatus, and health.  I have chosen these variables thinking that they would be easily available to a school without the need to survey students.
 
 **G3**:
 
@@ -42,9 +42,9 @@ My assumption here is that low grade is an indication of high alcohol use since 
 
 High number of absences could be an indication of high alcohol use as it would affect one's schedule.  Absenses could be due to being sick after consuming a lot of alcohol.
 
-**Pstatus**:
+**goout**
 
-Poor family relationship could be a predictor of high alcohol use.  Living apart parents could be an extra stressor for a student. 
+Going out with friend a lot might raise alcohol consumption since there will be more opportunities to consume alcohol.
 
 
 **health**:
@@ -68,13 +68,39 @@ gather(studentAlc) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") +
 g1 <- ggplot(studentAlc, aes(x = high_use, y = G3, col = sex))
 
 # define the plot as a boxplot and draw it
-g1 + geom_boxplot() + ylab("grade")
+g1 + geom_boxplot() + ylab("grade") + ggtitle("Student final grade by alcohol consumption and sex")
 
 # initialise a plot of high_use and absences
 g2 <- ggplot(studentAlc, aes(x = high_use, y = absences, col = sex))
 
 # define the plot as a boxplot and draw it
 g2 + geom_boxplot() + ggtitle("Student absences by alcohol consumption and sex")
+
+# initialize a plot of high_use and 
+g3 <- ggplot(studentAlc, aes(x = high_use, y = goout, col = sex))
+
+# define the plot as a boxplot and draw it
+g3 + geom_boxplot() + ylab("going out") + ggtitle("Student going out with friends by alcohol consumption and sex")
+
+g4 <- ggplot(studentAlc, aes(x = high_use, y = health, col = sex))
+
+# define the plot as a boxplot and draw it
+g4 + geom_boxplot() + ylab("health") + ggtitle("Student health by alcohol consumption and sex")
 ```
 
+## Numerical exploration of my chosen variables
+
+```{r}
+# produce summary statistics by grade
+studentAlc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_grade = mean(G3))
+
+# produce summary statistics by absences
+studentAlc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_absences = mean(absences))
+
+# produce summary statistics by going out
+studentAlc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_going_out = mean(goout))
+
+# produce summary statistics by health
+studentAlc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_health = mean(health))
+```
 
