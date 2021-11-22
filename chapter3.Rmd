@@ -104,3 +104,23 @@ studentAlc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_going_out
 studentAlc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_health = mean(health))
 ```
 
+## Interpretation of the above plots and tables
+
+We see that grades are lower for male when high_use of alcohol is true.  Female seems to be less negatively affected.  Final grade is not as a strong predictor as I thought.  Absences and high_use of alcohol seems to have a good correlation.  Female seems to have a little more absences than male when high_use of alcohol is true.  going out shows some correlation for male and female for high_use of alcohol.  The more a student go out the more he or she consume alcohol.  Health does not seem to have a strong correlation with high_use of alcohol.  I would have thought that there would have been a stronger correlation.  It is possible that the participants did not truthfully answer this question or that participants are not aware of their overall health (mental and physical).  This seems to be especially true for male.  Female have a broader range of answers with 25% of them describing their health below 2 (Q1 high_use = true).
+
+## Logistic regression to statistically explore the relationship between my chosen variables
+
+
+For this model, high_use is the target variable and final grade, absences, going out, and health are the predictors.
+I did not include sex because if a school needs to predict high_use of alcohol, sex might add an unnecessary bias.  For instance, male students might be watched more carefully than female students because male seems to have higher high_use of alcohol.
+```{r}
+# find the model with glm()
+m <- glm(high_use ~ G3 + absences + goout + health, data = studentAlc, family = "binomial")
+
+# print out a summary of the model
+summary(m)
+
+# print out the coefficients of the model
+coef(m)
+```
+
