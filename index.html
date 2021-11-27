@@ -181,6 +181,7 @@ pre code {
 <li><a href="#predictive-power-of-my-model">Predictive power of my model</a></li>
 <li><a href="#fold-cross-validation">10-fold cross-validation</a></li>
 </ul></li>
+<li><a href="#clustering-and-classification">Clustering and classification</a></li>
 </ul>
 </div>
 
@@ -190,7 +191,7 @@ pre code {
 <pre class="r"><code># This is a so-called &quot;R chunk&quot; where you can write R code.
 
 date()</code></pre>
-<pre><code>## [1] &quot;Sun Nov 21 23:16:18 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Sat Nov 27 12:04:48 2021&quot;</code></pre>
 <p>I am interested in this course because of my research and I am expecting that this course will be a strong introduction to data science. The course should give me enough knowledge to be able to use data science process in my research.</p>
 <p>I learned about the course via an email sent to me by my department.</p>
 <p>My GitHub repository can be found <a href="https://github.com/mdmairet/IODS-project"><strong>here</strong>.</a></p>
@@ -543,7 +544,7 @@ cv &lt;- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
 
 # average number of wrong predictions in the cross validation
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2540541</code></pre>
+<pre><code>## [1] 0.2459459</code></pre>
 <p>The result of the cross-validation (K=10) is similar to the previous result of the loss function. My model seems to produce a similar result as the model found in DataCamp.</p>
 </div>
 <div id="super-bonus" class="section level3">
@@ -595,7 +596,7 @@ cv &lt;- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
 
 # average number of wrong predictions in the cross validation
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2459459</code></pre>
+<pre><code>## [1] 0.2540541</code></pre>
 </div>
 <div id="new-model-with-2-variable-only" class="section level4">
 <h4>New model with 2 variable only</h4>
@@ -640,9 +641,13 @@ cv &lt;- cv.glm(data = studentAlc, cost = loss_func, glmfit = m, K = 10)
 cv$delta[1]</code></pre>
 <pre><code>## [1] 0.2432432</code></pre>
 <p>It seems that the result is not greatly improved when going from many variables to only 2 variables.</p>
+<hr />
 </div>
 </div>
 </div>
+</div>
+<div id="clustering-and-classification" class="section level1">
+<h1>Clustering and classification</h1>
 </div>
 
 
