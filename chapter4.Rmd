@@ -6,3 +6,40 @@ output: html_document
 ---
 
 # Clustering and classification
+
+
+```{r}
+#code from DataCamp.
+
+#access the MASS package
+library(MASS)
+library (dplyr)
+library(corrplot)
+
+#load the data
+data("Boston")
+
+#explore the dataset
+str(Boston)
+dim(Boston)
+summary(Boston)
+
+
+#plot matrix of the variables
+pairs(Boston, gap=1/10)
+```
+
+
+```{r}
+# MASS, corrplot, tidyr and Boston dataset are available
+
+# calculate the correlation matrix and round it
+cor_matrix<-cor(Boston) %>% round(digits = 2)
+
+# print the correlation matrix
+cor_matrix
+
+# visualize the correlation matrix
+corrplot(cor_matrix, method="circle", type="upper", cl.pos="b", tl.pos="d", tl.cex = 0.6)
+```
+
