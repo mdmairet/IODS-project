@@ -206,13 +206,31 @@ dist_man <- dist(Boston, method = 'manhattan')
 # look at the summary of the distances
 summary(dist_man)
 ```
-
+### cluster with centers = 3
 ```{r message = FALSE, warning = FALSE}
 # k-means clustering
 km <-kmeans(Boston, centers = 3)
 
 # plot the Boston dataset with clusters
 pairs(Boston, col = km$cluster)
+```
+### cluster with centers = 4
+```{r message = FALSE, warning = FALSE}
+# k-means clustering
+km <-kmeans(Boston, centers = 4)
+
+# plot the Boston dataset with clusters
+pairs(Boston, col = km$cluster)
+
+```
+### cluster with centers = 2
+```{r message = FALSE, warning = FALSE}
+# k-means clustering
+km <-kmeans(Boston, centers = 2)
+
+# plot the Boston dataset with clusters
+pairs(Boston, col = km$cluster)
+
 ```
 
 ```{r message = FALSE, warning = FALSE}
