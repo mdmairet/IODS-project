@@ -6,13 +6,12 @@
 library(dplyr)
 
 
-# read files
-
+# part 2: read files
 
 hd <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human_development.csv", stringsAsFactors = F)
 gii <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/gender_inequality.csv", stringsAsFactors = F, na.strings = "..")
 
-# Explore files structures and dimensions of hd and gii
+# part 3: Explore files structures and dimensions of hd and gii
 
 str(hd)
 dim(hd)
@@ -24,7 +23,7 @@ dim(gii)
 colnames(hd)
 colnames(gii)
 
-# rename columns for hd and gii 
+# part 4: rename columns for hd and gii 
 
 names(hd)[names(hd) == 'HDI.Rank'] <- 'HDI_R'
 names(hd)[names(hd) == 'Human.Development.Index..HDI.'] <- 'HDI'
@@ -32,7 +31,7 @@ names(hd)[names(hd) == 'Life.Expectancy.at.Birth'] <- 'LEB'
 names(hd)[names(hd) == 'Expected.Years.of.Education'] <- 'EYE'
 names(hd)[names(hd) == 'Mean.Years.of.Education'] <- 'MYE'
 names(hd)[names(hd) == 'Gross.National.Income..GNI..per.Capita'] <- 'GNIC'
-names(hd)[names(hd) == 'GNI.per.Capita.Rank.Minus.HDI.Rank'] <- 'GNICminusHDI_R'
+names(hd)[names(hd) == 'GNI.per.Capita.Rank.Minus.HDI.Rank'] <- 'GNIC-HDI_R'
 
 
 
@@ -52,10 +51,15 @@ names(gii)[names(gii) == 'Labour.Force.Participation.Rate..Male.'] <- 'LFPRM'
 colnames(hd)
 colnames(gii)
 
-# mutate for gii
+# part 5: mutate for gii
 
 gii <- mutate(gii, RFMPSE = PSEF/PSEM)
 gii <- mutate(gii, RFMLFP = LFPRF/LFPRM)
 
-colnames(gii)
-gii
+# Part 6: merge hd with gii by country name
+
+hdgii <- merge(hd, gii, by = "Country")
+
+# show dimension of new merged data set
+
+dim(hdgii)
