@@ -184,11 +184,15 @@ lda.pred <- predict(lda.fit, newdata = test)
 table(correct = correct_classes, predicted = lda.pred$class)
 ```
 The best predictions are for high.  Also, the model does not predict very well med_high.  We can see in the LD plot that med_high and med_low are in the same side.  The model predicts high correctly because the distance between high and low, med_low, and med_high is large.
-## Part 7: Reload the Boston dataset and standardize the dataset 
+
+# Part 7: Reload the Boston dataset and standardize the dataset 
 ```{r message = FALSE, warning = FALSE}
 # load MASS and Boston
 library(MASS)
 data('Boston')
+
+# scale data
+Boston = as.data.frame(scale(Boston))
 
 # euclidean distance matrix
 dist_eu <- dist(Boston)
