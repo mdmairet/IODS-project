@@ -84,8 +84,19 @@ corrplot(cor_matrix, method="circle", type="upper", cl.pos="b", tl.pos="d", tl.c
 corrplot(cor_matrix, method = 'number', type="upper")
 
 ```
+Looking at the data, we see that medv has a positive correlation with rm and a negative correlation with lstat.  This make sense as a house would have a higher price based on the number of rooms.  As well, house located in a lower status population area would have a lower price.  We also see that nox has a positive correlation with indus and age. nox has a negative correlation with dis.  The higher the number of industry, the higher the emission of nitrogen oxides.  Older houses would probably be mostly in old industrial areas of the city.  medv has a positive correlation with crim but only at 0.33.  At first glance, the value of houses is mainly due to th e number of rooms per dwelling.  Taxes has a small negative correlation with medv.
 
+# Part 4: standardize the dataset
+
+During scaling of the data, the mean is subtracted from the column and the difference is divided by the standard deviation.
+This is an example of the data before and after scaling.
+<br>
+Before:<br>
+row 1: rm = 6.575<br>
+After:<br>
+row 1: rm = 0.413262920
 ```{r message = FALSE, warning = FALSE}
+
 # center and standardize variables
 boston_scaled <- scale(Boston)
 
@@ -98,7 +109,7 @@ class(boston_scaled)
 # change the object to data frame
 boston_scaled <- as.data.frame(boston_scaled)
 ```
-
+Use the quantiles as the break points in the categorical variable and divide the dataset to train and test sets
 ```{r message = FALSE, warning = FALSE}
 # summary of the scaled crime rate
 summary(boston_scaled$crim)
@@ -137,7 +148,9 @@ correct_classes <- test$crime
 # remove the crime variable from test data
 test <- dplyr::select(test, -crime)
 ```
+Now, 80% of the data belongs to the train set.
 
+# Part 5:  linear discriminant analysis
 ```{r message = FALSE, warning = FALSE}
 # linear discriminant analysis
 lda.fit <- lda(crime ~ ., data = train)
