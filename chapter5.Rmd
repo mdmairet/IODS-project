@@ -1,0 +1,11 @@
+---
+title: "Chapter 5"
+author: "Marc Denojean-Mairet"
+date: "04/12/2021"
+output: html_document
+---
+
+# Chapter 5: Dimensionality reduction techniques
+
+## Part 1: Show a graphical overview of the data and show summaries of the variables in the data
+

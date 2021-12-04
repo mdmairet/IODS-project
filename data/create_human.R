@@ -1,12 +1,16 @@
 # Marc Denojean-Mairet
 # Chapter 4 Script
-
+# Original data source: http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human1.txt
+# http://hdr.undp.org/en/content/human-development-index-hdi
+# the “Human development” and “Gender inequality” datas are from the above the United Nations development programme.
+# The Human Development Index (HDI) was created to emphasize that people and their capabilities should be the ultimate criteria 
+# for assessing the development of a country, not economic growth alone. 
 
 
 library(dplyr)
 
 
-# part 2: read files
+# part 2: Read the “Human development” and “Gender inequality” datas into R.
 
 hd <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human_development.csv", stringsAsFactors = F)
 gii <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/gender_inequality.csv", stringsAsFactors = F, na.strings = "..")
@@ -24,6 +28,15 @@ colnames(hd)
 colnames(gii)
 
 # part 4: rename columns for hd and gii 
+# for dataset hd, the long variable names have been changed to:
+
+#'HDI.Rank' = 'HDI_R'
+#'Human.Development.Index..HDI.' = 'HDI'
+#'Life.Expectancy.at.Birth' = 'LEB'
+#'Expected.Years.of.Education' = 'EYE'
+#'Mean.Years.of.Education' = 'MYE'
+#'Gross.National.Income..GNI..per.Capita' = 'GNIC'
+#'GNI.per.Capita.Rank.Minus.HDI.Rank' = 'GNIC-HDI_R'
 
 names(hd)[names(hd) == 'HDI.Rank'] <- 'HDI_R'
 names(hd)[names(hd) == 'Human.Development.Index..HDI.'] <- 'HDI'
@@ -34,6 +47,19 @@ names(hd)[names(hd) == 'Gross.National.Income..GNI..per.Capita'] <- 'GNIC'
 names(hd)[names(hd) == 'GNI.per.Capita.Rank.Minus.HDI.Rank'] <- 'GNIC-HDI_R'
 
 
+
+
+#for gii dataset, the long variable names have been changed to:
+
+#'GII.Rank' = 'GII_R'
+#'Gender.Inequality.Index..GII.' = 'GII'
+#'Maternal.Mortality.Ratio' = 'MMR'
+#'Adolescent.Birth.Rate' = 'ABR'
+#'Percent.Representation.in.Parliament' = 'PRP'
+#'Population.with.Secondary.Education..Female.' = 'PSEF'
+#'Population.with.Secondary.Education..Male.' = 'PSEM'
+#'Labour.Force.Participation.Rate..Female.' = 'LFPRF'
+#'Labour.Force.Participation.Rate..Male.' = 'LFPRM'
 
 names(gii)[names(gii) == 'GII.Rank'] <- 'GII_R'
 names(gii)[names(gii) == 'Gender.Inequality.Index..GII.'] <- 'GII'
@@ -52,6 +78,9 @@ colnames(hd)
 colnames(gii)
 
 # part 5: mutate for gii
+#create two new variables. 
+#The first one is the ratio of Female and Male populations with secondary education in each country.
+#The second new variable is the ratio of labour force participation of females and males in each country.
 
 gii <- mutate(gii, RFMPSE = PSEF/PSEM)
 gii <- mutate(gii, RFMLFP = LFPRF/LFPRM)
@@ -61,5 +90,9 @@ gii <- mutate(gii, RFMLFP = LFPRF/LFPRM)
 hdgii <- merge(hd, gii, by = "Country")
 
 # show dimension of new merged data set
-
+# hdgii dataset has 195 observations and 19 variables
 dim(hdgii)
+
+# Save new data set to data folder
+write.csv(hdgii,file="~/IODS-project/IODS-project/data/hdgii.csv", row.names=FALSE)
+
