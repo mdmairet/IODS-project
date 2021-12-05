@@ -6,6 +6,10 @@
 # The Human Development Index (HDI) was created to emphasize that people and their capabilities should be the ultimate criteria 
 # for assessing the development of a country, not economic growth alone. 
 
+# ***This work on wrangler started last week and continue this week.***
+
+
+# *** Last week work ***
 
 library(dplyr)
 
@@ -93,6 +97,32 @@ hdgii <- merge(hd, gii, by = "Country")
 # hdgii dataset has 195 observations and 19 variables
 dim(hdgii)
 
+
 # Save new data set to data folder
 write.csv(hdgii,file="~/IODS-project/IODS-project/data/hdgii.csv", row.names=FALSE)
+
+# *** This week work ***
+
+# read given dataset file into human
+library(stringr)
+
+human <- read.table("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human1.txt", sep = ",", header = TRUE)
+
+# see description of the data in last week work (above).  Please note the file and variable names from my last week work are different then the given file in the exercise.
+# for this week, I am using the given file in the exercise.
+
+#195 observations and 19 variables
+dim(human)
+str(human)
+
+# part 1: mutate and change observations of GNI from chr to numerical
+
+# remove "," from GNI variables and assign to GNIN
+GNIN  <- str_replace(human$GNI, pattern=",", replace ="") %>% as.numeric
+
+# mutate GNI with GNIN
+human <- mutate(human, GNI = GNIN)
+
+# check structure of GNI (now num)
+str(human)
 
