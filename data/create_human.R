@@ -105,6 +105,7 @@ write.csv(hdgii,file="~/IODS-project/IODS-project/data/hdgii.csv", row.names=FAL
 
 # read given dataset file into human
 library(stringr)
+library (dplyr)
 
 human <- read.table("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human1.txt", sep = ",", header = TRUE)
 
@@ -126,3 +127,56 @@ human <- mutate(human, GNI = GNIN)
 # check structure of GNI (now num)
 str(human)
 
+# part 2: Exclude unneeded variables
+# code is from DataCamp
+
+# columns to keep
+keep <- c("Country", "Edu2.FM", "Labo.FM", "Life.Exp", "Edu.Exp", "GNI", "Mat.Mor", "Ado.Birth", "Parli.F")
+
+# select the 'keep' columns
+human <- select(human, one_of(keep))
+
+# print out a completeness indicator of the 'human' data
+complete.cases(human)
+
+# print out the data along with a completeness indicator as the last column
+data.frame(human[-1], comp = complete.cases(human))
+
+# part 3: Remove all rows with missing values
+# code is from DataCamp
+
+# filter out all rows with NA values
+human_ <- filter(human, complete.cases(human))
+
+# part 4: Remove the observations which relate to regions instead of countries
+# code is from DataCamp
+
+# look at the last 10 observations
+tail(human_, 10)
+
+# last indice we want to keep
+last <- nrow(human_) - 7
+
+# choose everything until the last 7 observations
+human_ <- human[1:last, ]
+
+str(human_)
+
+# part 5: Define the row names of the data by the country names and remove the country name column from the data
+# code is from DataCamp
+
+# add countries as rownames
+rownames(human_) <- human_$Country
+
+# remove the Country variable
+human_ <- select(human_, -Country)
+
+# dim and str
+# 155 observations and 8 variables
+
+dim(human_)
+
+str(human_)
+
+#save new dataset as human.csv to data folder
+write.csv(human_,file="~/IODS-project/IODS-project/data/human.csv", row.names=TRUE)
