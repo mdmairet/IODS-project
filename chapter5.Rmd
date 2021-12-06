@@ -9,7 +9,7 @@ output: html_document
 
 ## Part 1: Show a graphical overview of the data and show summaries of the variables in the data
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 
 # set plots size
 knitr::opts_chunk$set(fig.width=16, fig.height=10) 
@@ -31,10 +31,13 @@ cor(human) %>% corrplot
 # summary of the data
 summary(human)
 ```
+### Interpretation:
+
+From the above graphs, we see that we have normal, binomial distributions.  We also see some strong negative and positve correlations.  For instance, Ado.Birth as a positive correlation with Mat.Mor (0.759).  As well, Mat.Mor and Life.Exp have a negative correlation (-0.857).  Another interesting correlation is the positive correlation between Life.Exp and Edu.Exp (0.789).  There is a positive correlation between GNI and Life.Exp (0.627) but it is lower than I would have expected.  Life.Exp does increase in countries with high GNI but not much.  There is a negative correlation between Ado.Birth and Edu.EXp.  This would suggest that the two variables are moving in opposite direction.
 
 ## Part 2: Perform principal component analysis (PCA) on the not standardized human data.
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 # code is from DataCamp
 
 # perform principal component analysis (with the SVD method)
@@ -46,7 +49,7 @@ biplot(pca_human, choices = 1:2, cex = c(0.8, 1), col = c("red", "blue"))
  
 ## Part 3: Standardize the variables in the human data and repeat the above analysis. 
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 # code is from DataCamp
 
 # standardize the variables
@@ -63,11 +66,39 @@ biplot(pca_human, choices = 1:2, cex = c(0.8, 1), col = c("red", "blue"))
 
 ```
 
+```{r message = FALSE, warning = FALSE}
+# create and print out a summary of pca_human
+s <- summary(pca_human)
+s
+
+# rounded percentages of variance captured by each PC
+pca_pr <- round(100*s$importance[2,], digits = 1) 
+
+# print out the percentages of variance
+pca_pr
+
+# create object pc_lab to be used as axis labels
+pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
+
+# draw a biplot
+biplot(pca_human, cex = c(0.8, 1), col = c("red", "blue"), xlab = pc_lab[1], ylab = pc_lab[2])
+```
+
+### Interpretation:
+
+From the above tables and graphs, we see that the non-standardized data are difficult to interpret.  The biplot graph shows most of the country to be on the top right corner and the arrow to have a 0 length.  The standardized PCA biplot shows that most of the countries are in the middle of the graph.  We see that arrows of Mat.Mor and Ado.Birth have a small angle (meaning that they are correlated).  They have a positive correlation and are more explained by PC1.  GNI and Edu2.FM are strongly correlated and are explained by PC2.  Overall, the angles between arrows show correlations.  The smaller the angle the stronger the correlation.
+
 ## Part 4: personal interpretations of the first two principal component dimensions based on the biplot drawn after PCA on the standardized human data
+
+## Interpretation:
+
+
 
 ## Part 5: Load the tea dataset from the package Factominer
 
 ```{r message = FALSE, warning = FALSE}
+# code is from DataCamp
+
 library(dplyr) 
 library(ggplot2)
 library(tidyr)
