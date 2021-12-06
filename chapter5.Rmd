@@ -10,6 +10,10 @@ output: html_document
 ## Part 1: Show a graphical overview of the data and show summaries of the variables in the data
 
 ```{r}
+
+# set plots size
+knitr::opts_chunk$set(fig.width=16, fig.height=10) 
+
 # uploading dataset from: http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt
 human <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt", sep = ",",  header = TRUE)
 
@@ -26,5 +30,65 @@ cor(human) %>% corrplot
 
 # summary of the data
 summary(human)
+```
+
+## Part 2: Perform principal component analysis (PCA) on the not standardized human data.
+
+```{r}
+# code is from DataCamp
+
+# perform principal component analysis (with the SVD method)
+pca_human <- prcomp(human)
+
+# draw a biplot of the principal component representation and the original variables
+biplot(pca_human, choices = 1:2, cex = c(0.8, 1), col = c("red", "blue"))
+```
+ 
+## Part 3: Standardize the variables in the human data and repeat the above analysis. 
+
+```{r}
+# code is from DataCamp
+
+# standardize the variables
+human_std <- scale(human)
+
+# print out summaries of the standardized variables
+summary(human_std)
+
+# perform principal component analysis (with the SVD method)
+pca_human <- prcomp(human_std)
+
+# draw a biplot of the principal component representation and the original variables
+biplot(pca_human, choices = 1:2, cex = c(0.8, 1), col = c("red", "blue"))
+
+```
+
+## Part 4: personal interpretations of the first two principal component dimensions based on the biplot drawn after PCA on the standardized human data
+
+## Part 5: Load the tea dataset from the package Factominer
+
+```{r message = FALSE, warning = FALSE}
+library(dplyr) 
+library(ggplot2)
+library(tidyr)
+library(FactoMineR)
+
+data("tea")
+
+dim(tea)
+str(tea)
+
+# column names to keep in the dataset
+keep_columns <- c("Tea", "How", "how", "sugar", "where", "lunch")
+
+# select the 'keep_columns' to create a new dataset
+tea_time <- select(tea, one_of(keep_columns))
+
+# look at the summaries and structure of the data
+summary(tea_time)
+str(tea_time)
+
+# visualize the dataset
+gather(tea_time) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
 ```
 
