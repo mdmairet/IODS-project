@@ -9,3 +9,22 @@ output: html_document
 
 ## Part 1: Show a graphical overview of the data and show summaries of the variables in the data
 
+```{r}
+# uploading dataset from: http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt
+human <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt", sep = ",",  header = TRUE)
+
+# code is from DataCamp.
+# library
+library(GGally)
+library(corrplot)
+
+# visualize the 'human_' variables
+ggpairs(human)
+
+# compute the correlation matrix and visualize it with corrplot
+cor(human) %>% corrplot
+
+# summary of the data
+summary(human)
+```
+
