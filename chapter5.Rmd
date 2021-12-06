@@ -130,6 +130,8 @@ summary(mca)
 
 # visualize MCA
 plot(mca, invisible=c("ind"), habillage = "quali", graph.type = "classic")
-
 ```
 
+### Interpretation:
+
+The Tea dataset relates to the consumption of tea and how, when, and where it is consumed.  There are 300 observations and 36 variables.  We see that Earl Grey is the favority type of tea and that it is mainly consumed alone.  The tea is mainly bought in chain store and consumed before or after lunch (not much during lunch).  The tea is from tea bags and there is an equal use or not of sugar with it.  We see that milk, Earl Grey, sugar, tea bags, and chain store are in the direction of Dim2.  
