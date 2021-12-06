@@ -90,9 +90,9 @@ From the above tables and graphs, we see that the non-standardized data are diff
 
 ## Part 4: personal interpretations of the first two principal component dimensions based on the biplot drawn after PCA on the standardized human data
 
-## Interpretation:
+### Interpretation:
 
-
+PC1 captures 53.6% of total variance in the original variables.  PC2 captures 16.2% of variability.  We see that Ado.Birth, Life.Exp, Edue.FM, Mat.Mor, and GNI have a small angle with PC1.  This means that these variables have a high positive correlation with PC1.  The same is true with PC2 and Labo.FM and Parli.F. The length of the arrows are proportional to the standard deviations of the features.  We see that Mat.Mor, Labo.FM, and Life.Exp have the longest arrows.  Variables pointing in the direction of PC1 are contributing to that PC1 dimension.  The opposite is true for PC2.
 
 ## Part 5: Load the tea dataset from the package Factominer
 
