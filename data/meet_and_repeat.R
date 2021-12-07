@@ -1,5 +1,6 @@
 # Marc Denojean-Mairet
 # Chapter 6: Analysis of longitudinal data
+# Some code have been copied from DataCamp
 
 # libraries
 library(dplyr)
@@ -33,7 +34,6 @@ summary(RATS)
 
 # part 2: Convert the categorical variables of both data sets to factors
 
-
 # Factor treatment & subject
 BPRS$treatment <- factor(BPRS$treatment)
 BPRS$subject <- factor(BPRS$subject)
@@ -47,3 +47,17 @@ RATS$Group <- factor(RATS$Group)
 
 # Glimpse the data
 glimpse(RATS)
+
+# part 3: Convert the data sets to long form
+
+# Convert to long form
+BPRSL <-  BPRS %>% gather(key = weeks, value = bprs, -treatment, -subject)
+
+# Extract the week number
+BPRSL <-  BPRSL %>% mutate(week = as.integer(substr(weeks,5,5)))
+
+# Convert data to long form
+RATSL <- RATS %>%
+  gather(key = WD, value = Weight, -ID, -Group) %>%
+  mutate(Time = as.integer(substr(WD,3,4))) 
+
