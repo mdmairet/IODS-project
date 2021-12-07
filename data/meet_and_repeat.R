@@ -19,8 +19,6 @@ str(BPRS)
 # print out summaries of the variables
 summary(BPRS)
 
-
-
 # load rats data
 RATS <- read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/master/Examples/data/rats.txt", sep = "\t", header = TRUE)
 
