@@ -61,3 +61,18 @@ RATSL <- RATS %>%
   gather(key = WD, value = Weight, -ID, -Group) %>%
   mutate(Time = as.integer(substr(WD,3,4))) 
 
+# part 4: look at the new data sets
+
+dim (BPRSL)
+dim (RATSL)
+str (BPRSL)
+str (RATSL)
+summary (BPRSL)
+summary (RATSL)
+BPRSL
+RATSL
+
+# Save new data set to data folder
+write.csv(BPRSL,file="~/IODS-project/IODS-project/data/BPRSL.csv", row.names=T)
+# Save new data set to data folder
+write.csv(RATSL,file="~/IODS-project/IODS-project/data/RATSL.csv", row.names=T)
