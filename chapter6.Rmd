@@ -5,10 +5,20 @@ date: "10/12/2021"
 output: html_document
 ---
 
+# Chapter 6: Analysis of longitudinal data
+
+## Part 1: Implement the analyses of Chapter 8 of MABS
+
 ```{r message = FALSE, warning = FALSE}
 
 # set plots size
 knitr::opts_chunk$set(fig.width=16, fig.height=10)
+
+```
+
+## Part 2: Implement the analyses of Chapter 9 of MABS
+
+```{r message = FALSE, warning = FALSE}
 
 ```
 
