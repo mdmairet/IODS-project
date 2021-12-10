@@ -1,0 +1,14 @@
+---
+title: "Chapter 6"
+author: "Marc Denojean-Mairet"
+date: "10/12/2021"
+output: html_document
+---
+
+```{r message = FALSE, warning = FALSE}
+
+# set plots size
+knitr::opts_chunk$set(fig.width=16, fig.height=10)
+
+```
+
