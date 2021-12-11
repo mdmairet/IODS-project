@@ -63,6 +63,18 @@ RATSL <- RATS %>%
 
 # part 4: look at the new data sets
 
+# Wide Format:
+# repeated responses (longitudinal data) over a period of time are recorded in a single row.
+# Each response is a separate column.
+
+# Long Format:
+# Repeated responses over a period of time are recorded only in one column.
+# Variables that do not change over time, will have the same value
+# in multiple rows.
+
+# Reason to change from wide format to long format for analysis:
+# repeated measurements of the response will not be independent but correlated.
+
 dim (BPRSL)
 dim (RATSL)
 str (BPRSL)
