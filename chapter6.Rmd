@@ -11,6 +11,7 @@ output: html_document
 
 ### RATS dataset
 ```{r message = FALSE, warning = FALSE}
+# most of the code is from DataCamp
 
 # set plots size
 knitr::opts_chunk$set(fig.width=16, fig.height=10)
@@ -33,12 +34,85 @@ RATS$Group <- factor(RATS$Group)
 # Convert data to long form
 RATSL <- RATS %>%
   gather(key = WD, value = Weight, -ID, -Group) %>%
-  mutate(Time = as.integer(substr(WD,3,4))) 
+  mutate(Day = as.integer(substr(WD,3,4))) 
 
-
-RATSL
+# dataset
+print(RATSL, row.names = FALSE)
 
 ```
+
+### Plot of the RATSL data
+
+```{r message = FALSE, warning = FALSE}
+
+#Access the package ggplot2
+library(ggplot2)
+
+# Glimpse the data
+glimpse(RATSL)
+
+# Draw the plot
+ggplot(RATSL, aes(x = Day, y = Weight, linetype = ID, color = ID)) +
+  geom_line() + geom_point() +
+  facet_grid(. ~ Group, labeller = label_both)
+
+```
+
+
+From the above plots, we see that each group of rats started with a different initial weight.  Group 1 gained the least amount of weight during the study period.  Group 2 and group 3 did gain weight at approximately the same rate.
+
+### Plots of the RATSL data after standartization
+
+```{r message = FALSE, warning = FALSE}
+
+# Standardise the variable RATS
+RATSL <- RATSL %>%
+  group_by(Day) %>%
+  mutate(stdweight = (Weight - mean(Weight))/sd(Weight) ) %>%
+  ungroup()
+
+# Glimpse the data
+glimpse(RATSL)
+
+# Plot again with the standardised RATS
+ggplot(RATSL, aes(x = Day, y = stdweight, linetype = ID, color = ID)) +
+  geom_line() + geom_point() +
+  scale_linetype_manual(values = rep(1:16, Days=4)) +
+  facet_grid(. ~ Group, labeller = label_both) +
+  scale_y_continuous(name = "standardized Weight")
+
+```
+
+From the above standardized plots, we see that group 1 did not gain or lose weight.  We also see that group 2 gained the most weight and group 3 lost weight.
+
+### Summary Graph
+
+```{r message = FALSE, warning = FALSE}
+
+# Number of weeks, baseline (week 0) included
+n <- 9
+
+# Summary data with mean and standard error of RATS by Group and Day
+RATSS <- RATSL %>%
+  group_by(Group, Day) %>%
+  summarise( mean = mean(Weight), se = sd(Weight)/sqrt(n) ) %>%
+  ungroup()
+
+# Glimpse the data
+glimpse(RATSS)
+
+# Plot the mean profiles
+ggplot(RATSS, aes(x = Day, y = mean, linetype = Group, shape = Group)) +
+  geom_line() +
+  scale_linetype_manual(values = c(1,2,3)) +
+  geom_point(size=3) +
+  scale_shape_manual(values = c(1,2,3)) +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se, linetype="1"), width=0.3) +
+  theme(legend.position = c(0.8,0.8)) +
+  scale_y_continuous(name = "mean(Weight) +/- se(Weight)")
+
+```
+
 
 ## Part 2: Implement the analyses of Chapter 9 of MABS
 
