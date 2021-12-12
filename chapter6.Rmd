@@ -9,10 +9,34 @@ output: html_document
 
 ## Part 1: Implement the analyses of Chapter 8 of MABS
 
+### RATS dataset
 ```{r message = FALSE, warning = FALSE}
 
 # set plots size
 knitr::opts_chunk$set(fig.width=16, fig.height=10)
+
+# Loading RATS dataset
+
+# libraries
+library(dplyr)
+library(tidyr)
+
+# load rats data
+RATS <- read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/master/Examples/data/rats.txt", sep = "\t", header = TRUE)
+
+# Factor variables ID and Group
+RATS$ID <- factor(RATS$ID)
+RATS$Group <- factor(RATS$Group)
+
+
+
+# Convert data to long form
+RATSL <- RATS %>%
+  gather(key = WD, value = Weight, -ID, -Group) %>%
+  mutate(Time = as.integer(substr(WD,3,4))) 
+
+
+RATSL
 
 ```
 
