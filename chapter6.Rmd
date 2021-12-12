@@ -132,13 +132,15 @@ glimpse(RATSL8S)
 
 # Draw a boxplot of the mean versus treatment
 ggplot(RATSL8S, aes(x = Group, y = mean, color = Group)) +
-  geom_boxplot() +
+  geom_boxplot(outlier.colour="blue", outlier.shape=16,
+             outlier.size=10, notch=FALSE) +
   stat_summary(fun = "mean", geom = "point", shape=23, size=10, fill =  "red") +
   scale_y_continuous(name = "mean(Weight), weeks 1-9")
 
 
 ```
 
+From the above boxplot, group 2 seems to have more variation than group 1 and 3.  As well, we see 3 outliers.
 
 ## Part 2: Implement the analyses of Chapter 9 of MABS
 
