@@ -29,7 +29,7 @@ RATS <- read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/maste
 RATS$ID <- factor(RATS$ID)
 RATS$Group <- factor(RATS$Group)
 
-
+RATS
 
 # Convert data to long form
 RATSL <- RATS %>%
@@ -134,13 +134,27 @@ glimpse(RATSL8S)
 ggplot(RATSL8S, aes(x = Group, y = mean, color = Group)) +
   geom_boxplot(outlier.colour="blue", outlier.shape=16,
              outlier.size=10, notch=FALSE) +
-  stat_summary(fun = "mean", geom = "point", shape=23, size=10, fill =  "red") +
+  stat_summary(fun = mean, geom = "point", shape=23, size=10, fill =  "red", colour = "blue") +
   scale_y_continuous(name = "mean(Weight), weeks 1-9")
 
 
 ```
 
 From the above boxplot, group 2 seems to have more variation than group 1 and 3.  As well, we see 3 outliers.
+
+
+```{r message = FALSE, warning = FALSE}
+# Add the baseline from the original data as a new variable to the summary data
+RATSL8S2 <- RATSL8S %>%
+  mutate(baseline = RATS$WD1)
+
+# Fit the linear model with the mean as the response 
+fit <- lm(mean ~ baseline + Group, data = RATSL8S2)
+
+# Compute the analysis of variance table for the fitted model with anova()
+anova(fit)
+
+```
 
 ## Part 2: Implement the analyses of Chapter 9 of MABS
 
