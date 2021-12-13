@@ -228,3 +228,17 @@ summary(BPRS_ref)
 
 ```
 
+### Random Intercept and Random Slope Model
+
+```{r message = FALSE, warning = FALSE}
+# create a random intercept and random slope model
+BPRS_ref1 <- lmer(bprs ~ week + treatment + (week | subject), data = BPRSL, REML = FALSE)
+
+# print a summary of the model
+summary(BPRS_ref1)
+
+# perform an ANOVA test on the two models
+anova(BPRS_ref1, BPRS_ref)
+
+```
+

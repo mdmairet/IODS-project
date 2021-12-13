@@ -683,6 +683,53 @@ summary(BPRS_ref)</code></pre>
 ## week       -0.437       
 ## treatment2 -0.282  0.000</code></pre>
 </div>
+<div id="random-intercept-and-random-slope-model" class="section level3">
+<h3>Random Intercept and Random Slope Model</h3>
+<pre class="r"><code># create a random intercept and random slope model
+BPRS_ref1 &lt;- lmer(bprs ~ week + treatment + (week | subject), data = BPRSL, REML = FALSE)
+
+# print a summary of the model
+summary(BPRS_ref1)</code></pre>
+<pre><code>## Linear mixed model fit by maximum likelihood  [&#39;lmerMod&#39;]
+## Formula: bprs ~ week + treatment + (week | subject)
+##    Data: BPRSL
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##   2745.4   2772.6  -1365.7   2731.4      353 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.8919 -0.6194 -0.0691  0.5531  3.7976 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr 
+##  subject  (Intercept) 64.8222  8.0512        
+##           week         0.9609  0.9802   -0.51
+##  Residual             97.4305  9.8707        
+## Number of obs: 360, groups:  subject, 20
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)  46.4539     2.1052  22.066
+## week         -2.2704     0.2977  -7.626
+## treatment2    0.5722     1.0405   0.550
+## 
+## Correlation of Fixed Effects:
+##            (Intr) week  
+## week       -0.582       
+## treatment2 -0.247  0.000</code></pre>
+<pre class="r"><code># perform an ANOVA test on the two models
+anova(BPRS_ref1, BPRS_ref)</code></pre>
+<pre><code>## Data: BPRSL
+## Models:
+## BPRS_ref: bprs ~ week + treatment + (1 | subject)
+## BPRS_ref1: bprs ~ week + treatment + (week | subject)
+##           npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)  
+## BPRS_ref     5 2748.7 2768.1 -1369.4   2738.7                       
+## BPRS_ref1    7 2745.4 2772.6 -1365.7   2731.4 7.2721  2    0.02636 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
 </div>
 </div>
 
