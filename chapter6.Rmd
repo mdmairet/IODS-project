@@ -154,7 +154,11 @@ fit <- lm(mean ~ baseline + Group, data = RATSL8S2)
 # Compute the analysis of variance table for the fitted model with anova()
 anova(fit)
 
+
+
 ```
+
+Given that Pr(>F) is smaller than 0.05, we reject the null hypothesis (all means are equal) and we conclude that at least one group is different in weight than the others.
 
 ## Part 2: Implement the analyses of Chapter 9 of MABS
 
