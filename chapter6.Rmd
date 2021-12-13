@@ -203,6 +203,8 @@ ggplot(BPRSL, aes(x = week, y = bprs, linetype = subject)) +
 
 ```
 
+From the first plot, we see that there is a downward trend for some participants in treatment 1 and 2.  However, for some participants, bprs is increasing in treatment 1 and 2.
+
 ### The Linear model
 
 ```{r message = FALSE, warning = FALSE}
@@ -213,6 +215,8 @@ BPRS_reg <- lm(bprs ~ week + treatment, data = BPRSL)
 summary(BPRS_reg)
 
 ```
+
+Here, only week as some significance but treatment2 does not.
 
 ### The Random Intercept Model
 
@@ -263,6 +267,8 @@ ggplot(BPRSL, aes(x = week, y = Fitted, group = subject)) +
 
 ```
 
+Here, we see a better fit against the comparison model for BPRS_ref1 with a chi-square of 0.02636.
+
 ### Random Intercept and Random Slope Model with interaction
 
 ```{r message = FALSE, warning = FALSE}
@@ -292,4 +298,6 @@ ggplot(BPRSL2, aes(x = week, y = Fitted, group = subject)) +
 
 
 ```
+Here, we don't see a better fit so, BPRS_ref1 has the best fit.
 
+Overall, we see a decrease in bprs for all participants.  
