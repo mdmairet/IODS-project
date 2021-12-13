@@ -39,7 +39,7 @@ BPRS$treatment <- factor(BPRS$treatment)
 BPRS$subject <- factor(BPRS$subject)
 
 # Take a glimpse at the BPRSL data
-glimpse(BPRSL)
+glimpse(BPRS)
 
 # Factor variables ID and Group
 RATS$ID <- factor(RATS$ID)
