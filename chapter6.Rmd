@@ -242,3 +242,23 @@ anova(BPRS_ref1, BPRS_ref)
 
 ```
 
+### Random Intercept and Random Slope Model with interaction
+
+```{r message = FALSE, warning = FALSE}
+# create a random intercept and random slope model
+BPRS_ref2 <- lmer(bprs ~ week * treatment + (week | subject), data = BPRSL, REML = FALSE)
+
+# print a summary of the model
+summary(BPRS_ref2)
+
+# perform an ANOVA test on the two models
+anova(BPRS_ref2, BPRS_ref1)
+
+# draw the plot of BPRSL
+ggplot(BPRSL, aes(x = week, y = bprs, group = subject)) +
+  geom_line(aes(colour = treatment)) +
+  geom_point()
+
+
+```
+
